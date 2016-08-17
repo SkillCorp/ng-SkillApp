@@ -20,6 +20,9 @@ import '@angularclass/request-idle-callback';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 
+// angular2-jwt
+import 'angular2-jwt';
+
 if ('production' === ENV) {
   // Production
 
