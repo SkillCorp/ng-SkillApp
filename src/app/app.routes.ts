@@ -6,10 +6,11 @@ import { Login } from './auth/login';
 import { NoContent } from './no-content';
 
 import { DataResolver } from './app.resolver';
+import { AuthGuard } from './auth';
 
 export const routes: RouterConfig = [
-  { path: '', component: Home },
-  { path: 'home', component: Home },
+  { path: '', component: Home, canActivate: [AuthGuard] },
+  { path: 'home', component: Home, canActivate: [AuthGuard] },
   { path: 'login', component: Login },
   // make sure you match the component type string to the require in asyncRoutes
   {
