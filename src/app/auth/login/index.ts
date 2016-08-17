@@ -1,3 +1,3 @@
-export { LoginResponse } from './login-response';
-export { Login } from './login.component';
-export { LoginService } from './login.service';
+export * from './login-response';
+export * from './login.component';
+export * from './login.service';

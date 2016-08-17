@@ -1,3 +1,3 @@
 export * from './login';
-export { AuthGuard } from './auth.guard';
-export { LoginService } from './login/login.service';
+export * from './auth.guard';
+export * from './headers';
