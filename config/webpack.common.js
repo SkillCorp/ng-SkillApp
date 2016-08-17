@@ -44,7 +44,7 @@ module.exports = {
    *
    * See: http://webpack.github.io/docs/configuration.html#cache
    */
-   //cache: false,
+  //cache: false,
 
   /*
    * The entry point for the bundle
@@ -55,8 +55,8 @@ module.exports = {
   entry: {
 
     'polyfills': './src/polyfills.browser.ts',
-    'vendor':    './src/vendor.browser.ts',
-    'main':      './src/main.browser.ts'
+    'vendor': './src/vendor.browser.ts',
+    'main': './src/main.browser.ts'
 
   },
 
@@ -101,7 +101,7 @@ module.exports = {
        *
        * See: https://github.com/wbuchwalter/tslint-loader
        */
-       // { test: /\.ts$/, loader: 'tslint-loader', exclude: [ helpers.root('node_modules') ] },
+      // { test: /\.ts$/, loader: 'tslint-loader', exclude: [ helpers.root('node_modules') ] },
 
       /*
        * Source map loader support for *.js files
@@ -173,6 +173,27 @@ module.exports = {
         test: /\.html$/,
         loader: 'raw-loader',
         exclude: [helpers.root('src/index.html')]
+      },
+
+      {
+        test: /\.less$/,
+        loader: 'style!css!less'
+      },
+      {
+        test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&minetype=application/font-woff"
+      }, {
+        test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&minetype=application/font-woff"
+      }, {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&minetype=application/octet-stream"
+      }, {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "file"
+      }, {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&minetype=image/svg+xml"
       }
 
     ]
@@ -267,6 +288,12 @@ module.exports = {
     new HtmlElementsPlugin({
       headTags: require('./head-config.common')
     }),
+
+    new webpack.ProvidePlugin({
+      jQuery: 'jquery',
+      $: 'jquery',
+      jquery: 'jquery'
+    })
 
   ],
 
