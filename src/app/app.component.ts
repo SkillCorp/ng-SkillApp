@@ -4,6 +4,9 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
 import { AppState } from './app.service';
+import { Router } from '@angular/router';
+
+import { tokenNotExpired } from 'angular2-jwt';
 
 /**
  * Just to demonstrate traditional Bootstrap integration. Better to use
@@ -54,6 +57,9 @@ import 'bootstrap/js/tooltip';
               <a [routerLink]=" ['./about'] ">About</a>
             </li>
           </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a *ngIf="isLoggedIn()" class="btn" role="button" (click)="logout()">Logout</a></li>            
+          </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -83,13 +89,23 @@ export class App {
   angularclassLogo = 'assets/img/angularclass-avatar.png';
   name = 'Angular 2 Webpack Starter';
   url = 'https://twitter.com/AngularClass';
-
+  jwt = '';
   constructor(
-    public appState: AppState) {
+    public appState: AppState,
+    public router: Router) {
+    this.jwt = localStorage.getItem('id_token');
   }
 
   ngOnInit() {
     console.log('Initial App State', this.appState.state);
+  }
+
+  logout() {
+    localStorage.removeItem('id_token');
+    this.router.navigate(['/login']);
+  }
+  isLoggedIn(): boolean {
+    return tokenNotExpired();
   }
 }
 
